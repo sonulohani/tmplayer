@@ -10,15 +10,16 @@
 namespace tmplayer
 {
 
- CommandLineParser::CommandLineParser()
+CommandLineParser::CommandLineParser()
 {
-     setApplicationDescription(QObject::tr("Terminal media player"));
-     addHelpOption();
-     addVersionOption();
-     Q_ASSERT(addOption(inputOption));
-     Q_ASSERT(addOption(enableLoggingOption));
-     process(*qApp);
- }
+    setApplicationDescription(QObject::tr("Terminal media player"));
+    addHelpOption();
+    addVersionOption();
+    inputOption.setValueName("input");
+    Q_ASSERT(addOption(inputOption));
+    Q_ASSERT(addOption(enableLoggingOption));
+    process(*qApp);
+}
 
 CommandLineParser *CommandLineParser::m_pCommandLineParser = nullptr;
 
