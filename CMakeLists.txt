@@ -28,7 +28,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 configure_file(include/config.h.in generated/config.h)
 
 set(tmplayer_HDRS
-	${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in)
+	include/config.h.in)
 
 set(tmplayer_SRCS
     src/main.cpp)
