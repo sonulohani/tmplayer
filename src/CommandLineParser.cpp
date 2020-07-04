@@ -15,8 +15,8 @@ CommandLineParser::CommandLineParser()
     setApplicationDescription(QObject::tr("Terminal media player"));
     addHelpOption();
     addVersionOption();
-    inputOption.setValueName("input");
-    Q_ASSERT(addOption(inputOption));
+    inputPathOption.setValueName("input");
+    Q_ASSERT(addOption(inputPathOption));
     Q_ASSERT(addOption(enableLoggingOption));
     process(*qApp);
 }
@@ -34,7 +34,7 @@ CommandLineParser *CommandLineParser::instance()
 
 QString CommandLineParser::inputPath() const
 {
-    return isSet(inputOption) ? value(inputOption) : QString();
+    return isSet(inputPathOption) ? value(inputPathOption) : QString();
 }
 
 bool CommandLineParser::loggingEnabled() const

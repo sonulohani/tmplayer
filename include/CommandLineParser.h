@@ -27,12 +27,12 @@ class CommandLineParser : public QCommandLineParser
 
   private:
     static CommandLineParser *m_pCommandLineParser;
-    QCommandLineOption inputOption{QStringList() << "i"
-                                                 << "input",
-                                   QObject::tr("Input to the tool"), QString()};
+    QCommandLineOption inputPathOption{QStringList() << "i"
+                                                     << "input",
+                                       QObject::tr("Input path to the tool."), QString()};
     QCommandLineOption enableLoggingOption{QStringList() << "l"
                                                          << "log",
-                                           QObject::tr("Generate log file")};
+                                           QObject::tr("Enable logging.")};
 };
 
 } // namespace tmplayer
