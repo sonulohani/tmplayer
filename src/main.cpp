@@ -10,14 +10,23 @@
 #include "FileInfoManager.h"
 #include "config.h"
 
+using tmplayer::CommandLineParser;
+using tmplayer::FileInfoManager;
+
 auto main(int argc, char *argv[]) -> int
 {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName(PROJECT_NAME);
     QCoreApplication::setApplicationVersion(PROJECT_VER);
 
-    auto parser{tmplayer::CommandLineParser::instance()};
-    tmplayer::CommandLineParser::resetInstance();
+    auto commandLineParser{CommandLineParser::instance()};
+
+    auto fileInfoManager{FileInfoManager::instance()};
+    fileInfoManager->add(commandLineParser->inputPath());
+
+    // Deallocating all singletons
+    FileInfoManager::resetInstance();
+    CommandLineParser::resetInstance();
 
     return QCoreApplication::exec();
 }

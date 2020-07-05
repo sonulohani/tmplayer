@@ -21,18 +21,13 @@ auto FileInfoManager::instance() -> FileInfoManager *
     return s_pFileInfoManagerInstance;
 }
 
-void FileInfoManager::addFileInfo(const QFileInfo &fileInfo)
+void FileInfoManager::addFile(const QString &file)
 {
+    auto fileInfo = QFileInfo{file};
     if (fileInfo.exists())
     {
         m_fileInfos.append(fileInfo);
     }
-}
-
-void FileInfoManager::addFileInfo(const QString &file)
-{
-    auto fileInfo = QFileInfo{file};
-    addFileInfo(fileInfo);
 }
 
 void FileInfoManager::addDirectory(const QString &dirName)
@@ -43,7 +38,7 @@ void FileInfoManager::addDirectory(const QString &dirName)
         QDirIterator it(dir.absolutePath(), QDir::Files, QDirIterator::Subdirectories);
         while (it.hasNext())
         {
-            addFileInfo(it.next());
+            addFile(it.next());
         }
     }
 }
@@ -54,6 +49,48 @@ void FileInfoManager::resetInstance()
     {
         delete s_pFileInfoManagerInstance;
         s_pFileInfoManagerInstance = nullptr;
+    }
+}
+
+void FileInfoManager::add(QString &path)
+{
+    QFileInfo fileInfo{path};
+    fileInfo.isDir() ? addDirectory(path) : addFile(path);
+}
+
+auto FileInfoManager::hasNext() const -> bool
+{
+    return m_fileInfosIt.hasNext();
+}
+
+auto FileInfoManager::hasPrev() const -> bool
+{
+    return m_fileInfosIt.hasPrevious();
+}
+
+auto FileInfoManager::next() -> QFileInfo
+{
+    if (!m_fileInfos.empty() && hasNext())
+    {
+        return m_fileInfosIt.next();
+    }
+    else
+    {
+        m_fileInfosIt.toFront();
+        next();
+    }
+}
+
+auto FileInfoManager::prev() -> QFileInfo
+{
+    if (!m_fileInfos.empty() && hasPrev())
+    {
+        return m_fileInfosIt.previous();
+    }
+    else
+    {
+        m_fileInfosIt.toBack();
+        prev();
     }
 }
 

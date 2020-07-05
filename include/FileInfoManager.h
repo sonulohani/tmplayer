@@ -23,9 +23,13 @@ class FileInfoManager final
     static FileInfoManager *instance();
     static void resetInstance();
 
-    void addFileInfo(const QFileInfo &fileInfo);
-    void addFileInfo(const QString &file);
+    void addFile(const QString &file);
     void addDirectory(const QString &dirName);
+    void add(QString &path);
+    bool hasNext() const;
+    bool hasPrev() const;
+    QFileInfo next();
+    QFileInfo prev();
 
   private:
     FileInfoManager() = default;
@@ -34,6 +38,7 @@ class FileInfoManager final
   private:
     static FileInfoManager *s_pFileInfoManagerInstance;
     QList<QFileInfo> m_fileInfos;
+    QListIterator<QFileInfo> m_fileInfosIt{m_fileInfos};
 };
 
 } // namespace tmplayer

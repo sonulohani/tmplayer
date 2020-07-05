@@ -22,6 +22,7 @@ else()
     message(SEND_ERROR "The Qt5Core library could not be found!")
 endif(Qt5Core_FOUND)
 
+find_package(SFML COMPONENTS audio REQUIRED)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
@@ -38,6 +39,6 @@ set(tmplayer_SRCS
     src/main.cpp)
 
 add_executable(tmplayer ${tmplayer_SRCS} ${tmplayer_HDRS})
-target_link_libraries(tmplayer PRIVATE Qt5::Core)
+target_link_libraries(tmplayer PRIVATE Qt5::Core sfml-audio)
 target_include_directories(tmplayer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include 
                                             ${CMAKE_CURRENT_BINARY_DIR}/generated)
