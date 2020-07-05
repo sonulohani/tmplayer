@@ -5,6 +5,7 @@
  */
 
 #include "CommandLineParser.h"
+
 #include <QDebug>
 
 namespace tmplayer
@@ -23,7 +24,7 @@ CommandLineParser::CommandLineParser()
 
 CommandLineParser *CommandLineParser::m_pCommandLineParser = nullptr;
 
-CommandLineParser *CommandLineParser::instance()
+auto CommandLineParser::instance() -> CommandLineParser *
 {
     if (m_pCommandLineParser == nullptr)
     {
@@ -32,12 +33,21 @@ CommandLineParser *CommandLineParser::instance()
     return m_pCommandLineParser;
 }
 
-QString CommandLineParser::inputPath() const
+void CommandLineParser::resetInstance()
+{
+    if (m_pCommandLineParser != nullptr)
+    {
+        delete m_pCommandLineParser;
+        m_pCommandLineParser = nullptr;
+    }
+}
+
+auto CommandLineParser::inputPath() const -> QString
 {
     return isSet(inputPathOption) ? value(inputPathOption) : QString();
 }
 
-bool CommandLineParser::loggingEnabled() const
+auto CommandLineParser::loggingEnabled() const -> bool
 {
     return isSet(enableLoggingOption);
 }

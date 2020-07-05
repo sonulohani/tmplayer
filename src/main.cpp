@@ -17,6 +17,7 @@ auto main(int argc, char *argv[]) -> int
     QCoreApplication::setApplicationVersion(PROJECT_VER);
 
     auto parser{tmplayer::CommandLineParser::instance()};
+    tmplayer::CommandLineParser::resetInstance();
 
     return QCoreApplication::exec();
 }

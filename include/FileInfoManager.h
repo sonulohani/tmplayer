@@ -21,9 +21,10 @@ class FileInfoManager final
 
   public:
     static FileInfoManager *instance();
+    static void resetInstance();
 
-    void addMediaInfo(const QFileInfo &mediaInfo);
-    void addMediaInfo(const QString &file);
+    void addFileInfo(const QFileInfo &fileInfo);
+    void addFileInfo(const QString &file);
     void addDirectory(const QString &dirName);
 
   private:

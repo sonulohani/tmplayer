@@ -18,6 +18,7 @@ class CommandLineParser : public QCommandLineParser
 
   public:
     static CommandLineParser *instance();
+    static void resetInstance();
     QString inputPath() const;
     bool loggingEnabled() const;
 
