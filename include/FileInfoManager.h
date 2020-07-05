@@ -25,7 +25,7 @@ class FileInfoManager final
 
     void addFile(const QString &file);
     void addDirectory(const QString &dirName);
-    void add(QString &path);
+    void add(const QString &path);
     bool hasNext() const;
     bool hasPrev() const;
     QFileInfo next();

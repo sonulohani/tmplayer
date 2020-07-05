@@ -52,7 +52,7 @@ void FileInfoManager::resetInstance()
     }
 }
 
-void FileInfoManager::add(QString &path)
+void FileInfoManager::add(const QString &path)
 {
     QFileInfo fileInfo{path};
     fileInfo.isDir() ? addDirectory(path) : addFile(path);
@@ -74,11 +74,8 @@ auto FileInfoManager::next() -> QFileInfo
     {
         return m_fileInfosIt.next();
     }
-    else
-    {
-        m_fileInfosIt.toFront();
-        next();
-    }
+    m_fileInfosIt.toFront();
+    return next();
 }
 
 auto FileInfoManager::prev() -> QFileInfo
@@ -87,11 +84,8 @@ auto FileInfoManager::prev() -> QFileInfo
     {
         return m_fileInfosIt.previous();
     }
-    else
-    {
-        m_fileInfosIt.toBack();
-        prev();
-    }
+    m_fileInfosIt.toBack();
+    return prev();
 }
 
 } // namespace tmplayer
