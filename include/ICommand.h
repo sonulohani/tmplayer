@@ -4,7 +4,7 @@
  * this link : https://github.com/sonulohani/tmplayer/blob/master/LICENSE
  */
 
-#include <QSharedPointer>
+#pragma once
 
 namespace tmplayer
 {

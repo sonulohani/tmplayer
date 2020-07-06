@@ -4,8 +4,11 @@
  * this link : https://github.com/sonulohani/tmplayer/blob/master/LICENSE
  */
 
+#pragma once
+
 #include "ICommand.h"
 
+#include <QSharedPointer>
 #include <SFML/Audio/Music.hpp>
 
 namespace tmplayer

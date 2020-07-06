@@ -5,6 +5,7 @@
  */
 
 #include "FileInfoManager.h"
+
 #include <QDir>
 #include <QDirIterator>
 

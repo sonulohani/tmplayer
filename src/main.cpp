@@ -4,11 +4,11 @@
  * this link : https://github.com/sonulohani/tmplayer/blob/master/LICENSE
  */
 
-#include <QCoreApplication>
-
 #include "CommandLineParser.h"
 #include "FileInfoManager.h"
 #include "config.h"
+
+#include <QCoreApplication>
 
 using tmplayer::CommandLineParser;
 using tmplayer::FileInfoManager;

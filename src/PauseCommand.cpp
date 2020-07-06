@@ -9,7 +9,7 @@
 namespace tmplayer
 {
 
-PauseCommand::PauseCommand(QSharedPointer<sf::Music> &music) : ICommand(), m_musicSPtr(music)
+PauseCommand::PauseCommand(QSharedPointer<sf::Music> &music) : m_musicSPtr(music)
 {
 }
 

@@ -6,8 +6,6 @@
 
 #include "CommandLineParser.h"
 
-#include <QDebug>
-
 namespace tmplayer
 {
 

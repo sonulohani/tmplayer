@@ -11,7 +11,7 @@
 namespace tmplayer
 {
 
-PlayCommand::PlayCommand(QSharedPointer<sf::Music> &music) : ICommand(), m_musicSPtr(music)
+PlayCommand::PlayCommand(QSharedPointer<sf::Music> &music) : m_musicSPtr(music)
 {
 }
 
