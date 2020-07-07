@@ -6,14 +6,19 @@
 
 #pragma once
 
-#include <QVariant>
+#include "ICommand.h"
+
+#include <QString>
 
 namespace tmplayer
 {
-class ICommand
+
+class AddFileCommand : public ICommand
 {
   public:
-    virtual ~ICommand() = default;
-    virtual void execute(const QVariant &) = 0;
+    AddFileCommand() = default;
+    ~AddFileCommand() = default;
+    void execute(const QVariant &variant) override;
 };
+
 } // namespace tmplayer

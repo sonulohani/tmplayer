@@ -16,7 +16,7 @@ PlayCommand::PlayCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSPtr
 {
 }
 
-void PlayCommand::execute()
+void PlayCommand::execute(const QVariant &)
 {
     QWeakPointer<sf::Music> musicWPtr = m_musicSPtr.toWeakRef();
     if (!musicWPtr.isNull())

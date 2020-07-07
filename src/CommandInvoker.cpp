@@ -24,7 +24,7 @@ void CommandInvoker::registerCommand(const CommandInvoker::CommandType type, con
     }
 }
 
-auto CommandInvoker::invoke(const QString &commandStr) -> bool
+auto CommandInvoker::invoke(const QString &commandStr, const QVariant &data) -> bool
 {
     auto it = s_kCommandMap.find(commandStr);
     if (it != s_kCommandMap.end())
@@ -36,7 +36,7 @@ auto CommandInvoker::invoke(const QString &commandStr) -> bool
 
             if (!commandWPtr.isNull())
             {
-                commandWPtr.lock()->execute();
+                commandWPtr.lock()->execute(data);
                 return true;
             }
         }

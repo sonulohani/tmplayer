@@ -9,6 +9,7 @@
 #include <QHash>
 #include <QHashFunctions>
 #include <QSharedPointer>
+#include <QVariant>
 #include <cstdint>
 
 namespace tmplayer
@@ -24,6 +25,7 @@ class CommandInvoker
     {
         PLAY = 0,
         PAUSE = 1,
+        ADD = 2,
         NONE = -1
     };
 
@@ -31,7 +33,7 @@ class CommandInvoker
     CommandInvoker() = default;
     virtual ~CommandInvoker() = default;
     void registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr);
-    bool invoke(const QString &commandStr);
+    bool invoke(const QString &commandStr, const QVariant &data = QVariant());
 
   private:
     static const QHash<QString, CommandType> s_kCommandMap;

@@ -4,6 +4,7 @@
  * this link : https://github.com/sonulohani/tmplayer/blob/master/LICENSE
  */
 
+#include "AddFileCommand.h"
 #include "CommandInvoker.h"
 #include "CommandLineParser.h"
 #include "FileInfoManager.h"
@@ -17,6 +18,7 @@
 #include <QSharedPointer>
 #include <SFML/Audio/Music.hpp>
 
+using tmplayer::AddFileCommand;
 using tmplayer::CommandInvoker;
 using tmplayer::CommandLineParser;
 using tmplayer::FileInfoManager;
@@ -34,8 +36,12 @@ void registerCommands(QSharedPointer<CommandInvoker> &commandInvokerSPtr)
     QSharedPointer<tmplayer::PauseCommand> pauseCommandSPtr =
         QSharedPointer<tmplayer::PauseCommand>(new tmplayer::PauseCommand(musicSPtr));
 
+    QSharedPointer<tmplayer::AddFileCommand> addFileCommandSPtr =
+        QSharedPointer<tmplayer::AddFileCommand>(new tmplayer::AddFileCommand());
+
     commandInvokerSPtr->registerCommand(CommandInvoker::CommandType::PLAY, playCommandSPtr);
     commandInvokerSPtr->registerCommand(CommandInvoker::CommandType::PAUSE, pauseCommandSPtr);
+    commandInvokerSPtr->registerCommand(CommandInvoker::CommandType::ADD, addFileCommandSPtr);
 }
 
 auto main(int argc, char *argv[]) -> int

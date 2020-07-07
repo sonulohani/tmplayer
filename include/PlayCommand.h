@@ -27,7 +27,7 @@ class PlayCommand : public ICommand
   public:
     PlayCommand(const sf::MusicSPtr &musicSPtr);
     ~PlayCommand() = default;
-    void execute() override;
+    void execute(const QVariant &) override;
 
   private:
     sf::MusicSPtr m_musicSPtr;

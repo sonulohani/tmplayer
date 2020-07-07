@@ -15,7 +15,7 @@ PauseCommand::PauseCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSP
 {
 }
 
-void PauseCommand::execute()
+void PauseCommand::execute(const QVariant &)
 {
     QWeakPointer<sf::Music> musicWPtr = m_musicSPtr.toWeakRef();
     if (!musicWPtr.isNull())

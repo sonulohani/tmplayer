@@ -20,8 +20,14 @@ InputHandler::InputHandler(CommandInvokerSPtr &invokerSPtr) : m_invokerSPtr(invo
 QString InputHandler::takeInputAndProcess()
 {
     QTextStream stream(stdin);
-    auto input = stream.readLine();
-    m_invokerSPtr->invoke(input);
+    QList<QVariant> dataList;
+    auto input = stream.readLine().simplified();
+    auto inputs = input.split(" ");
+    for (auto i = 1; i < inputs.size(); ++i)
+    {
+        dataList.append(QVariant(inputs[i]));
+    }
+    m_invokerSPtr->invoke(inputs[0], QVariant(dataList));
     return input;
 }
 

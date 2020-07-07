@@ -26,7 +26,7 @@ class PauseCommand : public ICommand
   public:
     PauseCommand(const sf::MusicSPtr &musicSPtr);
     virtual ~PauseCommand() = default;
-    void execute() override;
+    void execute(const QVariant &) override;
 
   private:
     sf::MusicSPtr m_musicSPtr;
