@@ -6,10 +6,12 @@
 
 #include "PauseCommand.h"
 
+#include <SFML/Audio/Music.hpp>
+
 namespace tmplayer
 {
 
-PauseCommand::PauseCommand(QSharedPointer<sf::Music> &music) : m_musicSPtr(music)
+PauseCommand::PauseCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSPtr)
 {
 }
 

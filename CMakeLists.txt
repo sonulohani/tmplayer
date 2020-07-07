@@ -29,18 +29,20 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 configure_file(include/config.h.in generated/config.h)
 
 set(tmplayer_HDRS
-	include/CommandInvoker.h
-	include/CommandLineParser.h
-	include/FileInfoManager.h
+    include/CommandInvoker.h
+    include/CommandLineParser.h
+    include/FileInfoManager.h
     include/ICommand.h
+    include/InputHandler.h
     include/PauseCommand.h
     include/PlayCommand.h
 	include/config.h.in)
 
 set(tmplayer_SRCS
-	src/CommandInvoker.cpp
-	src/CommandLineParser.cpp
-	src/FileInfoManager.cpp
+    src/CommandInvoker.cpp
+    src/CommandLineParser.cpp
+    src/FileInfoManager.cpp
+    src/InputHandler.cpp
     src/PauseCommand.cpp
     src/PlayCommand.cpp
     src/main.cpp)

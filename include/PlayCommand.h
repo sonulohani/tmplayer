@@ -11,16 +11,25 @@
 #include <QSharedPointer>
 #include <SFML/Audio/Music.hpp>
 
+namespace sf
+{
+
+class Music;
+using MusicSPtr = QSharedPointer<Music>;
+
+} // namespace sf
+
 namespace tmplayer
 {
+
 class PlayCommand : public ICommand
 {
   public:
-    PlayCommand(QSharedPointer<sf::Music> &music);
+    PlayCommand(const sf::MusicSPtr &musicSPtr);
     ~PlayCommand() = default;
     void execute() override;
 
   private:
-    QSharedPointer<sf::Music> m_musicSPtr;
+    sf::MusicSPtr m_musicSPtr;
 };
 } // namespace tmplayer

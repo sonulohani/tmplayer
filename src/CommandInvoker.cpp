@@ -5,6 +5,7 @@
  */
 
 #include "CommandInvoker.h"
+#include "ICommand.h"
 
 #include <QWeakPointer>
 
@@ -14,8 +15,7 @@ namespace tmplayer
 const QHash<QString, CommandInvoker::CommandType> CommandInvoker::s_kCommandMap = {
     {"play", CommandInvoker::CommandType::PLAY}, {"pause", CommandType::PAUSE}};
 
-void CommandInvoker::registerCommand(const CommandInvoker::CommandType type,
-                                     const QSharedPointer<ICommand> &commandSPtr)
+void CommandInvoker::registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr)
 {
     QWeakPointer commandWPtr = commandSPtr.toWeakRef();
     if (!commandWPtr.isNull())
@@ -24,7 +24,7 @@ void CommandInvoker::registerCommand(const CommandInvoker::CommandType type,
     }
 }
 
-auto CommandInvoker::invoke(const QString &commandStr, QSharedPointer<ICommand> &commandSPtr) -> bool
+auto CommandInvoker::invoke(const QString &commandStr) -> bool
 {
     auto it = s_kCommandMap.find(commandStr);
     if (it != s_kCommandMap.end())

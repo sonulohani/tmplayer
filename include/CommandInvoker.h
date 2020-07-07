@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include "ICommand.h"
-
 #include <QHash>
 #include <QHashFunctions>
 #include <QSharedPointer>
@@ -15,6 +13,10 @@
 
 namespace tmplayer
 {
+
+class ICommand;
+using ICommandSPtr = QSharedPointer<ICommand>;
+
 class CommandInvoker
 {
   public:
@@ -28,12 +30,12 @@ class CommandInvoker
   public:
     CommandInvoker() = default;
     virtual ~CommandInvoker() = default;
-    void registerCommand(const CommandInvoker::CommandType type, const QSharedPointer<ICommand> &commandSPtr);
-    bool invoke(const QString &commandStr, QSharedPointer<ICommand> &commandSPtr);
+    void registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr);
+    bool invoke(const QString &commandStr);
 
   private:
     static const QHash<QString, CommandType> s_kCommandMap;
-    QHash<CommandType, QSharedPointer<ICommand>> m_typeToCommandMap;
+    QHash<CommandType, ICommandSPtr> m_typeToCommandMap;
 };
 
 inline uint qHash(const CommandInvoker::CommandType &key)

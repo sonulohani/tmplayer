@@ -7,11 +7,12 @@
 #include "PlayCommand.h"
 
 #include <QWeakPointer>
+#include <SFML/Audio/Music.hpp>
 
 namespace tmplayer
 {
 
-PlayCommand::PlayCommand(QSharedPointer<sf::Music> &music) : m_musicSPtr(music)
+PlayCommand::PlayCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSPtr)
 {
 }
 
