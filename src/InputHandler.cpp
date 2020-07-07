@@ -13,33 +13,16 @@
 namespace tmplayer
 {
 
-InputHandler *InputHandler::s_pInputHandler = nullptr;
-
-const QVector<QString> InputHandler::s_kCommandVec = {"play", "pause", "help"};
-
-InputHandler *InputHandler::instance()
+InputHandler::InputHandler(CommandInvokerSPtr &invokerSPtr) : m_invokerSPtr(invokerSPtr)
 {
-    if (s_pInputHandler == nullptr)
-    {
-        s_pInputHandler = new InputHandler;
-    } // namespace tmplayer
-    return s_pInputHandler;
 }
 
-void InputHandler::resetInstance()
-{
-    if (s_pInputHandler == nullptr)
-    {
-        delete s_pInputHandler;
-        s_pInputHandler = nullptr;
-    }
-}
-
-void InputHandler::takeInputAndProcess(CommandInvokerSPtr &invokerSPtr)
+QString InputHandler::takeInputAndProcess()
 {
     QTextStream stream(stdin);
     auto input = stream.readLine();
-    invokerSPtr->invoke(input);
+    m_invokerSPtr->invoke(input);
+    return input;
 }
 
 } // namespace tmplayer

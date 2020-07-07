@@ -20,21 +20,13 @@ using CommandInvokerSPtr = QSharedPointer<CommandInvoker>;
 
 class InputHandler
 {
-    Q_DISABLE_COPY_MOVE(InputHandler)
-
   public:
-    static InputHandler *instance();
-    static void resetInstance();
-
-  private:
-    InputHandler() = default;
+    InputHandler(CommandInvokerSPtr &invokerSPtr);
     virtual ~InputHandler() = default;
-
-    void takeInputAndProcess(CommandInvokerSPtr &invokerSPtr);
+    QString takeInputAndProcess();
 
   private:
-    static InputHandler *s_pInputHandler;
-    static const QVector<QString> s_kCommandVec;
+    CommandInvokerSPtr m_invokerSPtr;
 };
 
 } // namespace tmplayer

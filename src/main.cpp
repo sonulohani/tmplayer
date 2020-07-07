@@ -13,6 +13,7 @@
 #include "config.h"
 
 #include <QCoreApplication>
+#include <QScopedPointer>
 #include <QSharedPointer>
 #include <SFML/Audio/Music.hpp>
 
@@ -51,10 +52,18 @@ auto main(int argc, char *argv[]) -> int
     auto commandInvokerSPtr = QSharedPointer<CommandInvoker>(new CommandInvoker);
     registerCommands(commandInvokerSPtr);
 
-    auto inputHandler{InputHandler::instance()};
+    QScopedPointer<InputHandler> inputHandler{new InputHandler(commandInvokerSPtr)};
+
+    while (true)
+    {
+        auto input = inputHandler->takeInputAndProcess();
+        if (input == "quit" || input == "q")
+        {
+            break;
+        }
+    }
 
     // Deallocating all singletons
-    InputHandler::resetInstance();
     FileInfoManager::resetInstance();
     CommandLineParser::resetInstance();
 
