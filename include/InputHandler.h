@@ -23,7 +23,7 @@ class InputHandler
   public:
     InputHandler(CommandInvokerSPtr &invokerSPtr);
     virtual ~InputHandler() = default;
-    QString takeInputAndProcess();
+    void takeInputAndProcess();
 
   private:
     CommandInvokerSPtr m_invokerSPtr;

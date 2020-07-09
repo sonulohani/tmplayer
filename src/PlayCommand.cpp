@@ -5,7 +5,7 @@
  */
 
 #include "PlayCommand.h"
-#include "FileInfoManager.h"
+#include "MediaPlaylist.h"
 
 #include <QMediaPlayer>
 #include <QWeakPointer>
@@ -19,16 +19,12 @@ PlayCommand::PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlayer
 
 void PlayCommand::execute(const QVariant &)
 {
-    QWeakPointer<MediaPlayerSPtr> mediaPlayerWPtr = m_mediaPlayerSPtr.toWeakRef();
+    auto mediaPlayerWPtr{m_mediaPlayerSPtr.toWeakRef()};
     if (!mediaPlayerWPtr.isNull())
     {
-        auto fileInfoManager = FileInfoManager::instance();
-        if (fileInfoManager->hasNext())
-        {
-            auto file = FileInfoManager::instance()->next().absoluteFilePath();
-            mediaPlayerWPtr.lock()->openFromFile(file.toStdString());
-            mediaPlayerWPtr.lock()->play();
-        }
+        auto mediaPlaylist{MediaPlaylist::instance()};
+        mediaPlayerWPtr.lock()->setPlaylist(mediaPlaylist);
+        mediaPlayerWPtr.lock()->play();
     }
 }
 } // namespace tmplayer

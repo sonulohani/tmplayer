@@ -7,8 +7,8 @@
 #include "AddFileCommand.h"
 #include "CommandInvoker.h"
 #include "CommandLineParser.h"
-#include "FileInfoManager.h"
 #include "InputHandler.h"
+#include "MediaPlaylist.h"
 #include "PauseCommand.h"
 #include "PlayCommand.h"
 #include "config.h"
@@ -21,8 +21,8 @@
 using tmplayer::AddFileCommand;
 using tmplayer::CommandInvoker;
 using tmplayer::CommandLineParser;
-using tmplayer::FileInfoManager;
 using tmplayer::InputHandler;
+using tmplayer::MediaPlaylist;
 using tmplayer::PauseCommand;
 using tmplayer::PlayCommand;
 
@@ -52,8 +52,8 @@ auto main(int argc, char *argv[]) -> int
 
     auto commandLineParser{CommandLineParser::instance()};
 
-    auto fileInfoManager{FileInfoManager::instance()};
-    fileInfoManager->add(commandLineParser->inputPath());
+    auto mediaPlaylist{MediaPlaylist::instance()};
+    // fileInfoManager->add(commandLineParser->inputPath()); TODO
 
     auto commandInvokerSPtr = QSharedPointer<CommandInvoker>(new CommandInvoker);
     registerCommands(commandInvokerSPtr);
@@ -62,15 +62,11 @@ auto main(int argc, char *argv[]) -> int
 
     while (true)
     {
-        auto input = inputHandler->takeInputAndProcess();
-        if (input == "quit" || input == "q")
-        {
-            break;
-        }
+        inputHandler->takeInputAndProcess();
     }
 
     // Deallocating all singletons
-    FileInfoManager::resetInstance();
+    MediaPlaylist::resetInstance();
     CommandLineParser::resetInstance();
 
     return QCoreApplication::exec();

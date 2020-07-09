@@ -5,7 +5,7 @@
  */
 
 #include "AddFileCommand.h"
-#include "FileInfoManager.h"
+#include "MediaPlaylist.h"
 
 namespace tmplayer
 {
@@ -17,7 +17,7 @@ void AddFileCommand::execute(const QVariant &variant)
         QList<QVariant> dataList = variant.toList();
         for (const auto &data : dataList)
         {
-            FileInfoManager::instance()->add(data.toString());
+            MediaPlaylist::instance()->add(data.toString());
         }
     }
 }

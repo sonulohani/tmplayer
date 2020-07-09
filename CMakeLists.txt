@@ -30,7 +30,7 @@ set(tmplayer_HDRS
     include/AddFileCommand.h
     include/CommandInvoker.h
     include/CommandLineParser.h
-    include/FileInfoManager.h
+    include/MediaPlaylist.h
     include/ICommand.h
     include/InputHandler.h
     include/PauseCommand.h
@@ -41,7 +41,7 @@ set(tmplayer_SRCS
     src/AddFileCommand.cpp
     src/CommandInvoker.cpp
     src/CommandLineParser.cpp
-    src/FileInfoManager.cpp
+    src/MediaPlaylist.cpp
     src/InputHandler.cpp
     src/PauseCommand.cpp
     src/PlayCommand.cpp

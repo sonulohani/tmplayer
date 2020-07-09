@@ -17,7 +17,7 @@ PauseCommand::PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlay
 
 void PauseCommand::execute(const QVariant &)
 {
-    QWeakPointer<MediaPlayerSPtr> mediaPlayerWPtr = m_mediaPlayerSPtr.toWeakRef();
+    auto mediaPlayerWPtr{m_mediaPlayerSPtr.toWeakRef()};
     if (!mediaPlayerWPtr.isNull())
     {
         mediaPlayerWPtr.lock()->pause();
