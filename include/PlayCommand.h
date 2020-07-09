@@ -9,15 +9,9 @@
 #include "ICommand.h"
 
 #include <QSharedPointer>
-#include <SFML/Audio/Music.hpp>
 
-namespace sf
-{
-
-class Music;
-using MusicSPtr = QSharedPointer<Music>;
-
-} // namespace sf
+class QMediaPlayer;
+using MediaPlayerSPtr = QSharedPointer<QMediaPlayer>;
 
 namespace tmplayer
 {
@@ -25,11 +19,11 @@ namespace tmplayer
 class PlayCommand : public ICommand
 {
   public:
-    PlayCommand(const sf::MusicSPtr &musicSPtr);
+    PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr);
     ~PlayCommand() = default;
     void execute(const QVariant &) override;
 
   private:
-    sf::MusicSPtr m_musicSPtr;
+    MediaPlayerSPtr m_mediaPlayerSPtr;
 };
 } // namespace tmplayer

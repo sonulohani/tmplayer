@@ -6,21 +6,21 @@
 
 #include "PauseCommand.h"
 
-#include <SFML/Audio/Music.hpp>
+#include <QMediaPlayer>
 
 namespace tmplayer
 {
 
-PauseCommand::PauseCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSPtr)
+PauseCommand::PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlayerSPtr(mediaPlayerSPtr)
 {
 }
 
 void PauseCommand::execute(const QVariant &)
 {
-    QWeakPointer<sf::Music> musicWPtr = m_musicSPtr.toWeakRef();
-    if (!musicWPtr.isNull())
+    QWeakPointer<MediaPlayerSPtr> mediaPlayerWPtr = m_mediaPlayerSPtr.toWeakRef();
+    if (!mediaPlayerWPtr.isNull())
     {
-        musicWPtr.lock()->pause();
+        mediaPlayerWPtr.lock()->pause();
     }
 }
 

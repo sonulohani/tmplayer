@@ -5,23 +5,30 @@
  */
 
 #include "PlayCommand.h"
+#include "FileInfoManager.h"
 
+#include <QMediaPlayer>
 #include <QWeakPointer>
-#include <SFML/Audio/Music.hpp>
 
 namespace tmplayer
 {
 
-PlayCommand::PlayCommand(const sf::MusicSPtr &musicSPtr) : m_musicSPtr(musicSPtr)
+PlayCommand::PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlayerSPtr(mediaPlayerSPtr)
 {
 }
 
 void PlayCommand::execute(const QVariant &)
 {
-    QWeakPointer<sf::Music> musicWPtr = m_musicSPtr.toWeakRef();
-    if (!musicWPtr.isNull())
+    QWeakPointer<MediaPlayerSPtr> mediaPlayerWPtr = m_mediaPlayerSPtr.toWeakRef();
+    if (!mediaPlayerWPtr.isNull())
     {
-        musicWPtr.lock()->play();
+        auto fileInfoManager = FileInfoManager::instance();
+        if (fileInfoManager->hasNext())
+        {
+            auto file = FileInfoManager::instance()->next().absoluteFilePath();
+            mediaPlayerWPtr.lock()->openFromFile(file.toStdString());
+            mediaPlayerWPtr.lock()->play();
+        }
     }
 }
 } // namespace tmplayer

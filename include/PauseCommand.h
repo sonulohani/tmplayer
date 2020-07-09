@@ -10,13 +10,8 @@
 
 #include <QSharedPointer>
 
-namespace sf
-{
-
-class Music;
-using MusicSPtr = QSharedPointer<Music>;
-
-} // namespace sf
+class QMediaPlayer;
+using MediaPlayerSPtr = QSharedPointer<QMediaPlayer>;
 
 namespace tmplayer
 {
@@ -24,12 +19,12 @@ namespace tmplayer
 class PauseCommand : public ICommand
 {
   public:
-    PauseCommand(const sf::MusicSPtr &musicSPtr);
+    PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr);
     virtual ~PauseCommand() = default;
     void execute(const QVariant &) override;
 
   private:
-    sf::MusicSPtr m_musicSPtr;
+    MediaPlayerSPtr m_mediaPlayerSPtr;
 };
 
 } // namespace tmplayer

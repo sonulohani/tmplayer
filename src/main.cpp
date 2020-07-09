@@ -14,9 +14,9 @@
 #include "config.h"
 
 #include <QCoreApplication>
+#include <QMediaPlayer>
 #include <QScopedPointer>
 #include <QSharedPointer>
-#include <SFML/Audio/Music.hpp>
 
 using tmplayer::AddFileCommand;
 using tmplayer::CommandInvoker;
@@ -28,13 +28,13 @@ using tmplayer::PlayCommand;
 
 void registerCommands(QSharedPointer<CommandInvoker> &commandInvokerSPtr)
 {
-    QSharedPointer<sf::Music> musicSPtr = QSharedPointer<sf::Music>(new sf::Music);
+    QSharedPointer<QMediaPlayer> mediaPlayerSPtr = QSharedPointer<QMediaPlayer>(new QMediaPlayer);
 
     QSharedPointer<tmplayer::PlayCommand> playCommandSPtr =
-        QSharedPointer<tmplayer::PlayCommand>(new tmplayer::PlayCommand(musicSPtr));
+        QSharedPointer<tmplayer::PlayCommand>(new tmplayer::PlayCommand(mediaPlayerSPtr));
 
     QSharedPointer<tmplayer::PauseCommand> pauseCommandSPtr =
-        QSharedPointer<tmplayer::PauseCommand>(new tmplayer::PauseCommand(musicSPtr));
+        QSharedPointer<tmplayer::PauseCommand>(new tmplayer::PauseCommand(mediaPlayerSPtr));
 
     QSharedPointer<tmplayer::AddFileCommand> addFileCommandSPtr =
         QSharedPointer<tmplayer::AddFileCommand>(new tmplayer::AddFileCommand());
