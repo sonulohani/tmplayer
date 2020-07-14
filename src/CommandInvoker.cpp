@@ -13,7 +13,10 @@ namespace tmplayer
 {
 
 const QHash<QString, CommandInvoker::CommandType> CommandInvoker::s_kCommandMap = {
-    {"play", CommandInvoker::CommandType::PLAY}, {"pause", CommandType::PAUSE}, {"add", CommandType::ADD}};
+    {"play", CommandInvoker::CommandType::PLAY},
+    {"pause", CommandType::PAUSE},
+    {"add", CommandType::ADD},
+    {"shuffle", CommandType::SHUFFLE}};
 
 void CommandInvoker::registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr)
 {

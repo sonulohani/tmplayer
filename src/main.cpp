@@ -60,9 +60,8 @@ auto main(int argc, char *argv[]) -> int
 
     QScopedPointer<InputHandler> inputHandler{new InputHandler(commandInvokerSPtr)};
 
-    while (true)
+    while (inputHandler->takeInputAndProcess())
     {
-        inputHandler->takeInputAndProcess();
     }
 
     // Deallocating all singletons

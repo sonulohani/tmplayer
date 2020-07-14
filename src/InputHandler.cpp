@@ -17,19 +17,22 @@ InputHandler::InputHandler(CommandInvokerSPtr &invokerSPtr) : m_invokerSPtr(invo
 {
 }
 
-void InputHandler::takeInputAndProcess()
+auto InputHandler::takeInputAndProcess() -> bool
 {
     QTextStream stream(stdin);
     QList<QVariant> dataList;
     auto input = stream.readLine().simplified();
     auto commandName = input.split(" ")[0];
     input = input.remove(QRegExp("^" + commandName)).simplified();
+    if (input == "quit" || input == "q")
+        return false;
     auto inputs = input.split(",");
     for (auto &input : inputs)
     {
         dataList.append(QVariant(input.remove("\"").remove("'")));
     }
     m_invokerSPtr->invoke(commandName, QVariant(dataList));
+    return true;
 }
 
 } // namespace tmplayer

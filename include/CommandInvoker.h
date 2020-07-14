@@ -26,6 +26,7 @@ class CommandInvoker
         PLAY = 0,
         PAUSE = 1,
         ADD = 2,
+        SHUFFLE = 3,
         NONE = -1
     };
 
@@ -33,7 +34,7 @@ class CommandInvoker
     CommandInvoker() = default;
     virtual ~CommandInvoker() = default;
     void registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr);
-    bool invoke(const QString &commandStr, const QVariant &data = QVariant());
+    auto invoke(const QString &commandStr, const QVariant &data = QVariant()) -> bool;
 
   private:
     static const QHash<QString, CommandType> s_kCommandMap;
