@@ -4,19 +4,20 @@
  * this link : https://github.com/sonulohani/tmplayer/blob/master/LICENSE
  */
 
-#include "ShuffleCommand.h"
-#include "MediaPlaylist.h"
+#include "QuitCommand.h"
+
+#include <QCoreApplication>
 
 namespace tmplayer
 {
 
-ShuffleCommand::ShuffleCommand(QObject *parent) : ICommand(parent)
+QuitCommand::QuitCommand(QObject *parent) : ICommand(parent)
 {
 }
 
-void ShuffleCommand::execute(const QVariant &)
+void QuitCommand::execute(const QVariant &)
 {
-    MediaPlaylist::instance()->shuffle();
+    qApp->quit();
 }
 
 } // namespace tmplayer

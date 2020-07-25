@@ -19,9 +19,9 @@ namespace tmplayer
 class PauseCommand : public ICommand
 {
   public:
-    PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr);
+    explicit PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr, QObject *parent = nullptr);
     virtual ~PauseCommand() = default;
-    void execute(const QVariant &) override;
+    void execute(const QVariant & /*unused*/) override;
 
   private:
     MediaPlayerSPtr m_mediaPlayerSPtr;

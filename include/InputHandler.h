@@ -7,6 +7,7 @@
 #pragma once
 
 #include <QHash>
+#include <QObject>
 #include <QSharedPointer>
 #include <QString>
 #include <QVector>
@@ -18,15 +19,20 @@ namespace tmplayer
 class CommandInvoker;
 using CommandInvokerSPtr = QSharedPointer<CommandInvoker>;
 
-class InputHandler
+class InputHandler : public QObject
 {
+    Q_OBJECT
   public:
-    InputHandler(CommandInvokerSPtr &invokerSPtr);
+    explicit InputHandler(CommandInvokerSPtr &invokerSPtr, QObject *parent = nullptr);
     virtual ~InputHandler() = default;
-    auto takeInputAndProcess() -> bool;
+    void dispatch();
+
+  signals:
+    void dispatched();
 
   private:
     CommandInvokerSPtr m_invokerSPtr;
+    QString m_inputStr;
 };
 
 } // namespace tmplayer

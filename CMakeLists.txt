@@ -9,8 +9,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
-set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
+set(Qt5_DIR /home/sonul/Documents/software/qt/lib/cmake/Qt5)
+set(Qt5Core_DIR /home/sonul/Documents/software/qt/lib/cmake/Qt5Core)
+set(Qt5Multimedia_DIR /home/sonul/Documents/software/qt/lib/cmake/Qt5Multimedia)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Multimedia REQUIRED)
 
@@ -35,6 +38,7 @@ set(tmplayer_HDRS
         include/InputHandler.h
         include/PauseCommand.h
         include/PlayCommand.h
+        include/QuitCommand.h
         include/ShuffleCommand.h
         include/config.h.in)
 
@@ -46,6 +50,7 @@ set(tmplayer_SRCS
         src/InputHandler.cpp
         src/PauseCommand.cpp
         src/PlayCommand.cpp
+        src/QuitCommand.cpp
         src/ShuffleCommand.cpp
         src/main.cpp)
 

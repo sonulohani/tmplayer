@@ -10,6 +10,10 @@
 namespace tmplayer
 {
 
+AddFileCommand::AddFileCommand(QObject *parent) : ICommand(parent)
+{
+}
+
 void AddFileCommand::execute(const QVariant &variant)
 {
     if (variant.isValid())

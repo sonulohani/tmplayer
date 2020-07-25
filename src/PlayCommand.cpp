@@ -13,7 +13,8 @@
 namespace tmplayer
 {
 
-PlayCommand::PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlayerSPtr(mediaPlayerSPtr)
+PlayCommand::PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr, QObject *parent)
+    : m_mediaPlayerSPtr(mediaPlayerSPtr), ICommand(parent)
 {
 }
 

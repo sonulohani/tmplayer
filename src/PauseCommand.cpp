@@ -11,7 +11,8 @@
 namespace tmplayer
 {
 
-PauseCommand::PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr) : m_mediaPlayerSPtr(mediaPlayerSPtr)
+PauseCommand::PauseCommand(const MediaPlayerSPtr &mediaPlayerSPtr, QObject *parent)
+    : m_mediaPlayerSPtr(mediaPlayerSPtr), ICommand(parent)
 {
 }
 

@@ -17,6 +17,7 @@
 #include <QMediaPlayer>
 #include <QScopedPointer>
 #include <QSharedPointer>
+#include <QTimer>
 
 using tmplayer::AddFileCommand;
 using tmplayer::CommandInvoker;
@@ -52,21 +53,23 @@ auto main(int argc, char *argv[]) -> int
 
     auto commandLineParser{CommandLineParser::instance()};
 
-    auto mediaPlaylist{MediaPlaylist::instance()};
     // fileInfoManager->add(commandLineParser->inputPath()); TODO
 
     auto commandInvokerSPtr = QSharedPointer<CommandInvoker>(new CommandInvoker);
     registerCommands(commandInvokerSPtr);
 
+    const int TIMEOUT_DURATION = 200; // in msec
+
     QScopedPointer<InputHandler> inputHandler{new InputHandler(commandInvokerSPtr)};
+    QObject::connect(inputHandler.data(), &InputHandler::dispatched, [&inputHandler]() {
+        QTimer::singleShot(TIMEOUT_DURATION, inputHandler.data(), &InputHandler::dispatch);
+    });
+    inputHandler->dispatch();
 
-    while (inputHandler->takeInputAndProcess())
-    {
-    }
-
-    // Deallocating all singletons
-    MediaPlaylist::resetInstance();
-    CommandLineParser::resetInstance();
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, []() {
+        MediaPlaylist::resetInstance();
+        CommandLineParser::resetInstance();
+    });
 
     return QCoreApplication::exec();
 }

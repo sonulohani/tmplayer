@@ -8,22 +8,19 @@
 
 #include "ICommand.h"
 
-#include <QSharedPointer>
-
-class QMediaPlayer;
-using MediaPlayerSPtr = QSharedPointer<QMediaPlayer>;
-
 namespace tmplayer
 {
 
-class PlayCommand : public ICommand
+class QuitCommand : public ICommand
 {
+    Q_OBJECT
   public:
-    PlayCommand(const MediaPlayerSPtr &mediaPlayerSPtr, QObject *parent = nullptr);
-    ~PlayCommand() = default;
+    explicit QuitCommand(QObject *parent = nullptr);
+    virtual ~QuitCommand() = default;
     void execute(const QVariant & /*unused*/) override;
 
-  private:
-    MediaPlayerSPtr m_mediaPlayerSPtr;
+  signals:
+    void quit();
 };
+
 } // namespace tmplayer

@@ -27,11 +27,12 @@ class CommandInvoker
         PAUSE = 1,
         ADD = 2,
         SHUFFLE = 3,
+        QUIT = 4,
         NONE = -1
     };
 
   public:
-    CommandInvoker() = default;
+    explicit CommandInvoker() = default;
     virtual ~CommandInvoker() = default;
     void registerCommand(const CommandInvoker::CommandType type, const ICommandSPtr &commandSPtr);
     auto invoke(const QString &commandStr, const QVariant &data = QVariant()) -> bool;

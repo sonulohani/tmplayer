@@ -8,31 +8,33 @@
 #include "CommandInvoker.h"
 #include "PlayCommand.h"
 
+#include <QDebug>
+#include <QKeyEvent>
 #include <QTextStream>
 
 namespace tmplayer
 {
 
-InputHandler::InputHandler(CommandInvokerSPtr &invokerSPtr) : m_invokerSPtr(invokerSPtr)
+InputHandler::InputHandler(CommandInvokerSPtr &invokerSPtr, QObject *parent)
+    : m_invokerSPtr(invokerSPtr), QObject(parent)
 {
 }
 
-auto InputHandler::takeInputAndProcess() -> bool
+void InputHandler::dispatch()
 {
     QTextStream stream(stdin);
     QList<QVariant> dataList;
     auto input = stream.readLine().simplified();
+    qDebug() << "Input is " << input;
     auto commandName = input.split(" ")[0];
     input = input.remove(QRegExp("^" + commandName)).simplified();
-    if (input == "quit" || input == "q")
-        return false;
     auto inputs = input.split(",");
     for (auto &input : inputs)
     {
         dataList.append(QVariant(input.remove("\"").remove("'")));
     }
     m_invokerSPtr->invoke(commandName, QVariant(dataList));
-    return true;
+    emit dispatched();
 }
 
 } // namespace tmplayer

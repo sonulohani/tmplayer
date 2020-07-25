@@ -16,7 +16,7 @@ namespace tmplayer
 class AddFileCommand : public ICommand
 {
   public:
-    AddFileCommand() = default;
+    explicit AddFileCommand(QObject *parent = nullptr);
     ~AddFileCommand() = default;
     void execute(const QVariant &variant) override;
 };

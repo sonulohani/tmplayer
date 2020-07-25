@@ -6,14 +6,18 @@
 
 #pragma once
 
+#include <QObject>
 #include <QVariant>
 
 namespace tmplayer
 {
-class ICommand
+class ICommand : public QObject
 {
   public:
+    explicit ICommand(QObject *parent = nullptr) : QObject(parent)
+    {
+    }
     virtual ~ICommand() = default;
-    virtual void execute(const QVariant &) = 0;
+    virtual void execute(const QVariant & /*unused*/) = 0;
 };
 } // namespace tmplayer

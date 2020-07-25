@@ -19,6 +19,7 @@ namespace tmplayer
 class ShuffleCommand : public ICommand
 {
   public:
+    explicit ShuffleCommand(QObject *parent = nullptr);
     ~ShuffleCommand() = default;
     void execute(const QVariant & /*unused*/) override;
 
